@@ -16,11 +16,14 @@ backend:
   # config options: https://node-postgres.com/apis/client
   database:
     client: pg
+    # Keep plugin data isolated in schemas inside the single PGO-managed database.
+    pluginDivisionMode: schema
     connection:
       host: ${POSTGRES_HOST}
       port: ${POSTGRES_PORT}
       user: ${POSTGRES_USER}
       password: ${POSTGRES_PASSWORD}
+      database: ${POSTGRES_DB}
       # https://node-postgres.com/features/ssl
       # you can set the sslmode configuration option via the `PGSSLMODE` environment variable
       # see https://www.postgresql.org/docs/current/libpq-ssl.html Table 33.1. SSL Mode Descriptions (e.g. require)
@@ -29,8 +32,12 @@ backend:
       #     $file: <file-path>/ca/server.crt
 
 auth:
+  environment: production
   providers:
-    guest: {}
+    # This project intentionally uses guest authentication for its local demo.
+    # Do not expose this deployment publicly without replacing guest authentication.
+    guest:
+      dangerouslyAllowOutsideDevelopment: true
 
 catalog:
   # Overrides the default list locations from app-config.yaml as these contain example data.
