@@ -7,6 +7,7 @@
  */
 
 import { createBackend } from '@backstage/backend-defaults';
+import { giteaGitopsModule } from './modules/giteaGitops';
 
 const backend = createBackend();
 
@@ -17,6 +18,7 @@ backend.add(import('@backstage/plugin-proxy-backend'));
 backend.add(import('@backstage/plugin-scaffolder-backend'));
 backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));
 backend.add(import('@backstage/plugin-scaffolder-backend-module-gitea'));
+backend.add(giteaGitopsModule);
 backend.add(
   import('@backstage/plugin-scaffolder-backend-module-notifications'),
 );

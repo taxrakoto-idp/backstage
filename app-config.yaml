@@ -178,6 +178,15 @@ auth:
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
+  # This backend-only action writes rendered values to the fixed private GitOps
+  # repository. Only the token is supplied from the runtime environment.
+  giteaGitops:
+    baseUrl: http://gitea-http.gitea.svc:3000
+    publicBaseUrl: http://localhost:3000
+    owner: demo-idp
+    repository: application-gitops
+    branch: main
+    token: ${GITEA_GITOPS_TOKEN}
 
 catalog:
   import:
@@ -193,6 +202,11 @@ catalog:
     # Local example template
     - type: file
       target: ../../examples/template/template.yaml
+      rules:
+        - allow: [Template]
+
+    - type: url
+      target: https://github.com/taxrakoto-idp/templates/blob/main/template/template.yaml
       rules:
         - allow: [Template]
 
