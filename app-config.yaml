@@ -99,6 +99,13 @@ app:
 organization:
   name: My Company
 
+# Public GitHub repositories, including Software Template skeletons, are read
+# anonymously. Add a token or GitHub App only if private repository access or
+# higher API rate limits become necessary.
+integrations:
+  github:
+    - host: github.com
+
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
